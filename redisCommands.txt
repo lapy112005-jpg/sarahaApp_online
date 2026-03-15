@@ -1,0 +1,57 @@
+set name hazem                      //setting name=hazem
+get name                            //hazem
+...................................................
+set age 25
+incr age                          // age=26
+...................................................
+set age 50 ex 20                  //age will expire after 50 seconds
+ttl age                          //19 .. time remaining 
+ttl age                          //-2 .. means age is no longer exists
+ttl name                         //-1 .. means name has no expire time 
+.......................................................................
+mget name age                    // multi get .. hazem,50
+del age                          // delete .. 1 
+.......................................................................
+expire name 20                   // adding expire time to key
+persist name                     // removing expire time from key
+.......................................................................
+set color red 
+set username hazem
+set userEmail kk@gmail
+keys *user                        // userEmail , userEmail
+.......................................................................
+exists username                   //1 means exist 0 means not exist
+.......................................................................
+hset user name hazem age 22       //2 {hset} is creating object 
+hget user age                     //25 .. hget gets from object
+hmget user name age               // hazen ,22... hash multi get 
+hkeys user                        //name , age
+hvals user                        //hazem , 22
+hgetall user                      //name hazem , age 22
+hexists user name                 //1..means its exist
+.......................................................................
+lpush colors red                   //creating array and push (lpush)
+lpush colors black                 //creating array and push (lpush)
+llen colors                        //length of array
+lrange colors 0 2                  //getting elements in range
+rpush colors green                 //adding in the last 
+lpop colors                        //pop from index 0
+rpop colors                        //pop from the last of array
+ltrim colors 0 2                   // delete all but keep element in range 0 -> 2 
+...............................................................................
+sadd colors red                   //adding set (unique list)
+smembers colors                   //show members of set
+scard colors                      //length of set
+srem colors red                   //remove ele
+sismember colors red              // check if exists
+sdiff colors colors2              //get diffrence between 2 sets
+sinter colors colors2              //get intersection between 2 sets
+.................................................................................
+flushall
+
+
+
+
+
+
+
