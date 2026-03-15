@@ -32,8 +32,6 @@ export const getMessage =  async(messageId , user)=>{
 }
 export const deleteMessageById =  async(messageId , user)=>{
     const message = await deleteOne({model:messageModel , filter:{_id:messageId , receiverid:user._id}})
-    console.log(message);
-    
     if (!message.deletedCount) {
         throw new Error("no matching message");
     }
@@ -41,15 +39,9 @@ export const deleteMessageById =  async(messageId , user)=>{
 }
 export const myMessages =  async(user)=>{
     const messages = await find({model:messageModel , filter:{receiverid:user._id}})
-    if (messages.length == 0) {
-        throw new Error("there is no messages found for u ");    
-    }
     return messages
 }
 export const messages_i_send =  async(user)=>{
     const messages = await find({model:messageModel , filter:{senderId:user._id}})
-    if (messages.length == 0) {
-        throw new Error("you dont send any message to anyone");    
-    }
     return messages
 }

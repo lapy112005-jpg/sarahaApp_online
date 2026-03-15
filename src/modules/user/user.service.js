@@ -39,8 +39,12 @@ export const logout = async ({ flag }, user, { jti, iat ,sub}) => {
 
 export const shareProfile = async(userId )=>{
   const user = await findOne({model:userModel , filter:{_id:userId} , select:"-password -role "})
-  
-  user.phone = decrypt(user.phone)
+  if (!user) {
+    throw new Error("User not found");
+  }
+  if (user.phone) {
+    user.phone = decrypt(user.phone)
+  }
   return user
 }
 
